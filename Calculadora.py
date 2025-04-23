@@ -1,7 +1,7 @@
 from tabulate import tabulate
 
-def exchange_money(monto, tasa_origen, tasa_destino):
-    return monto * (tasa_destino / tasa_origen)
+def exchange_money(budget, exchange_rate):
+    return budget / exchange_rate
 
 def mostrar_paises():
     paises = [
@@ -30,26 +30,20 @@ def obtener_tasa(pais):
 
 while True:
     print("\n=== Calculadora de Divisas ===")
-    monto = float(input("¿Cuánto dinero deseas convertir? "))
-
-    print("¿En qué país tienes ese dinero?")
-    mostrar_paises()
-    pais_origen = input("Escribe el número del país origen: ")
+    dinero = float(input("¿Cuánto dinero tienes en USD? "))
 
     print("¿A qué país vas a viajar?")
     mostrar_paises()
     pais_destino = input("Escribe el número del país destino: ")
 
-    tasa_origen = obtener_tasa(pais_origen)
-    tasa_destino = obtener_tasa(pais_destino)
+    tasa = obtener_tasa(pais_destino)
 
-    if tasa_origen is not None and tasa_destino is not None:
-        resultado = exchange_money(monto, tasa_origen, tasa_destino)
+    if tasa is not None:
+        resultado = exchange_money(dinero, tasa)
         print(tabulate([
-            ["Monto original", monto],
-            ["Tasa país origen (1 unidad local = USD)", tasa_origen],
-            ["Tasa país destino (1 unidad local = USD)", tasa_destino],
-            ["Monto recibido", round(resultado, 2)]
+            ["Monto original (USD)", dinero],
+            ["Tasa de cambio (1 unidad local = USD)", tasa],
+            ["Total recibido", round(resultado, 2)]
         ], headers=["Descripción", "Valor"], tablefmt="fancy_grid"))
     else:
         print("Opción inválida.")
