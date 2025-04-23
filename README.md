@@ -4,7 +4,7 @@ Este es un programa en Python que permite convertir dinero entre distintos país
 
 ## Versión de Python
 
-- Python 3.12.9
+- Python 3.12.10
 
 ## Requisitos
 
@@ -23,19 +23,25 @@ El sistema calcula automáticamente el equivalente en la moneda extranjera segú
 ## Instalación y Ejecución (paso a paso desde la terminal)
 
 # 1. Clona el repositorio desde GitHub:
+
 git clone https://github.com/YandellCM/CalculadoraDivisas.git
 
 # 2. Entra a la carpeta del proyecto:
+
 cd CalculadoraDivisas
 
 # 3. Crea el entorno virtual dentro del proyecto:
+
 python -m venv venv
 
 # 4. Activa el entorno virtual:
-venv\Scripts\activate
+
+source venv/Scripts/activate
 
 # 5. Instala las dependencias necesarias:
+
 pip install -r requirements.txt
 
 # 6. Ejecuta el programa:
+
 python Calculadora.py
