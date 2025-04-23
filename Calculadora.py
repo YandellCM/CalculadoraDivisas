@@ -1,57 +1,50 @@
 from tabulate import tabulate
 
-def exchangeMoney(dinero, tasaOrigen, tasaDestino):
-    resultado = dinero * (tasaDestino / tasaOrigen)
-    return resultado
+def exchange_money(budget, exchange_rate):
+    return budget / exchange_rate
 
-def mostrarPaises():
+def mostrar_paises():
     paises = [
-        ["Número", "País", "Tasa de Cambio"],
-        ["1", "Japón", 142.96],
-        ["2", "México", 19.626],
-        ["3", "Alemania", 0.8685],
-        ["4", "Colombia", 4346.48],
+        ["Número", "País", "Tasa de Cambio (1 unidad local = USD)"],
+        ["1", "Japón", 0.0075],
+        ["2", "México", 0.0509],
+        ["3", "Alemania (Euro)", 1.13],
+        ["4", "Colombia", 0.00026],
         ["5", "Estados Unidos", 1.00],
-        ["6", "República Dominicana", 60.20],
-        ["7", "Brasil", 5.7225]
+        ["6", "República Dominicana", 0.017],
+        ["7", "Brasil", 0.19]
     ]
     print(tabulate(paises, headers="firstrow", tablefmt="grid"))
 
-def obtenerTasa(pais):
+def obtener_tasa(pais):
     tasas = {
-        "1": 142.96,
-        "2": 19.626,
-        "3": 0.8685,
-        "4": 4346.48,
+        "1": 0.0075,
+        "2": 0.0509,
+        "3": 1.13,
+        "4": 0.00026,
         "5": 1.00,
-        "6": 60.20,
-        "7": 5.7225
+        "6": 0.017,
+        "7": 0.19
     }
     return tasas.get(pais)
 
 while True:
     print("\n=== Calculadora de Divisas ===")
-    dinero = float(input("¿Cuánto dinero tienes? "))
-
-    print("¿En qué país tienes ese dinero?")
-    mostrarPaises()
-    paisOrigen = input("Escribe el número del país origen: ")
+    dinero = float(input("¿Cuánto dinero deseas cambiar (en USD)? "))
 
     print("¿A qué país vas a viajar?")
-    mostrarPaises()
-    paisDestino = input("Escribe el número del país destino: ")
+    mostrar_paises()
+    pais_destino = input("Escribe el número del país destino: ")
 
-    tasaOrigen = obtenerTasa(paisOrigen)
-    tasaDestino = obtenerTasa(paisDestino)
+    tasa = obtener_tasa(pais_destino)
 
-    if tasaOrigen is not None and tasaDestino is not None:
-        resultado = exchangeMoney(dinero, tasaOrigen, tasaDestino)
+    if tasa is not None:
+        resultado = exchange_money(dinero, tasa)
         print(tabulate([
-            ["Moneda origen", dinero],
-            ["Tasa origen", tasaOrigen],
-            ["Tasa destino", tasaDestino],
+            ["Monto original (USD)", dinero],
+            ["Tasa de cambio (1 unidad local = USD)", tasa],
             ["Total recibido", round(resultado, 2)]
-        ], tablefmt="fancy_grid"))
+        ], headers=["Descripción", "Valor"], tablefmt="fancy_grid"))
     else:
         print("Opción inválida.")
 
